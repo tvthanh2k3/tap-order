@@ -13,6 +13,7 @@ export default function App() {
   const [status, setStatus] = useState<Status>('idle');
   const [nextNumber, setNextNumber] = useState(1);
   const [isAuto, setIsAuto] = useState(false);
+  const [gameKey, setGameKey] = useState(0);
 
   const boardRef = useRef<HTMLDivElement>(null);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -33,6 +34,8 @@ export default function App() {
     timeoutsRef.current = [];
     resetTimer();
     setNextNumber(1);
+    setIsAuto(false);
+    setGameKey((k) => k + 1);
     setCircles(generateCircles(points, board.clientWidth, board.clientHeight));
     setStatus('playing');
   }
@@ -83,6 +86,7 @@ export default function App() {
         ref={boardRef}
         circles={circles}
         status={status}
+        gameKey={gameKey}
         onCircleClick={handleCircleClick}
       />
       <footer className="footer">Next: {nextNumber}</footer>
