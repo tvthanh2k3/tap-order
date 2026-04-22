@@ -45,7 +45,7 @@ export default function App() {
       }
 
       setCircles((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, isClicked: true, opacity: 0 } : c))
+        prev.map((c) => (c.id === id ? { ...c, isClicked: true, opacity: 0, clickedAt: Date.now() } : c))
       );
 
       const newNext = currentNext + 1;
