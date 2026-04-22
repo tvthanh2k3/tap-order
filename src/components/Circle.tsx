@@ -1,26 +1,33 @@
 import { memo, useEffect, useState } from 'react';
-import type { Circle as CircleType } from '../types';
+import type { Circle as CircleType, Status } from '../types';
 
 type Props = {
   circle: CircleType;
+  status: Status;
   onClick: (id: number) => void;
 };
 
 const RADIUS = 20;
 const FADE_DURATION = 3000;
 
-function Circle({ circle, onClick }: Props) {
+function Circle({ circle, status, onClick }: Props) {
   const [timeLeft, setTimeLeft] = useState(FADE_DURATION);
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     if (!circle.isClicked || circle.clickedAt == null) return;
+    if (status === 'lost') return;
+
     const update = () => {
-      setTimeLeft(Math.max(0, FADE_DURATION - (Date.now() - circle.clickedAt!)));
+      const elapsed = Date.now() - circle.clickedAt!;
+      const remaining = Math.max(0, FADE_DURATION - elapsed);
+      setTimeLeft(remaining);
+      setOpacity(remaining / FADE_DURATION);
     };
     update();
     const interval = setInterval(update, 100);
     return () => clearInterval(interval);
-  }, [circle.isClicked, circle.clickedAt]);
+  }, [circle.isClicked, circle.clickedAt, status]);
 
   return (
     <div
@@ -28,7 +35,7 @@ function Circle({ circle, onClick }: Props) {
       style={{
         left: circle.x,
         top: circle.y,
-        opacity: circle.opacity,
+        opacity,
         zIndex: 1000 - circle.id,
       }}
       onClick={() => onClick(circle.id)}

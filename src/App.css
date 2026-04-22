@@ -106,7 +106,6 @@
   font-weight: 500;
   cursor: pointer;
   user-select: none;
-  transition: opacity 3s linear;
   transform: translate(-50%, -50%);
   line-height: 1.2;
 }

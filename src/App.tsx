@@ -41,11 +41,13 @@ export default function App() {
     setNextNumber((currentNext) => {
       if (id !== currentNext) {
         setStatus('lost');
+        timeoutsRef.current.forEach(clearTimeout);
+        timeoutsRef.current = [];
         return currentNext;
       }
 
       setCircles((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, isClicked: true, opacity: 0, clickedAt: Date.now() } : c))
+        prev.map((c) => (c.id === id ? { ...c, isClicked: true, clickedAt: Date.now() } : c))
       );
 
       const newNext = currentNext + 1;
@@ -77,6 +79,7 @@ export default function App() {
       <GameBoard
         ref={boardRef}
         circles={circles}
+        status={status}
         onCircleClick={handleCircleClick}
       />
       <footer className="footer">Next: {nextNumber}</footer>
