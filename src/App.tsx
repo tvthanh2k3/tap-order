@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Circle, Status } from './types';
 import { generateCircles } from './utils/generateCircles';
 import { useTimer } from './hooks/useTimer';
+import { useAutoPlay } from './hooks/useAutoPlay';
 import ControlPanel from './components/ControlPanel';
 import GameBoard from './components/GameBoard';
 import './App.css';
@@ -55,6 +56,8 @@ export default function App() {
       return newNext;
     });
   }, [points]);
+
+  useAutoPlay({ isAuto, status, nextNumber, onClickCircle: handleCircleClick });
 
   return (
     <div className="app">
