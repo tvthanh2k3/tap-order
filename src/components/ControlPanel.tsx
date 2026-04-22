@@ -41,12 +41,14 @@ export default function ControlPanel({
         <button className="btn-play" onClick={onPlay}>
           {playLabel}
         </button>
-        <button
-          className={`btn-auto${isAuto ? ' on' : ''}`}
-          onClick={onToggleAuto}
-        >
-          Auto Play {isAuto ? 'ON' : 'OFF'}
-        </button>
+        {status !== 'idle' && (
+          <button
+            className={`btn-auto${isAuto ? ' on' : ''}`}
+            onClick={onToggleAuto}
+          >
+            Auto Play {isAuto ? 'OFF' : 'ON'}
+          </button>
+        )}
       </div>
     </div>
   );
