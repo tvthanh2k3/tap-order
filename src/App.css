@@ -124,6 +124,17 @@
   background: #f0f0f0;
 }
 
+.circle-countdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 3px;
+  font-size: 11px;
+  color: #f97316;
+  white-space: nowrap;
+}
+
 .circle.clicked {
   background: #f97316;
   border-color: #f97316;
