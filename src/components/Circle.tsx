@@ -7,7 +7,7 @@ type Props = {
   onClick: (id: number) => void;
 };
 
-const RADIUS = 20;
+const RADIUS = 27;
 const FADE_DURATION = 3000;
 
 function Circle({ circle, status, onClick }: Props) {
