@@ -41,7 +41,7 @@ export default function ControlPanel({
         <button className="btn-play" onClick={onPlay}>
           {playLabel}
         </button>
-        {status !== 'idle' && (
+        {status === 'playing' && (
           <button
             className={`btn-auto${isAuto ? ' on' : ''}`}
             onClick={onToggleAuto}
