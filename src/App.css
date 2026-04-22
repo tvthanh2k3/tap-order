@@ -24,6 +24,9 @@
   letter-spacing: 1px;
 }
 
+.heading--won  { color: #4caf50; }
+.heading--lost { color: #f44336; }
+
 .control-row {
   display: flex;
   align-items: center;
@@ -81,47 +84,41 @@
   position: relative;
   width: 100%;
   height: 500px;
-  border: 1px solid #000;
+  border: 2px solid #333;
   background: #fff;
   flex-shrink: 0;
 }
 
-/* Status Overlay */
-.overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: bold;
-  z-index: 2000;
-}
-
-.overlay.won  { color: #4caf50; }
-.overlay.lost { color: #f44336; }
 
 /* Circle */
 .circle {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 1px solid #000;
   background: #fff;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   user-select: none;
-  transition: opacity 2s linear;
   transform: translate(-50%, -50%);
+  line-height: 1.2;
 }
 
 .circle:hover {
   background: #f0f0f0;
+}
+
+.circle-countdown {
+  font-size: 11px;
+  font-weight: 400;
+  color: inherit;
+  opacity: 0.85;
 }
 
 .circle.clicked {

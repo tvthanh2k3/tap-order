@@ -4,6 +4,7 @@ export type Circle = {
   y: number;
   isClicked: boolean;
   opacity: number;
+  clickedAt?: number;
 };
 
 export type Status = 'idle' | 'playing' | 'won' | 'lost';

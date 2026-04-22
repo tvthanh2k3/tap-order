@@ -1,21 +1,20 @@
 import { forwardRef } from 'react';
 import type { Circle as CircleType, Status } from '../types';
 import Circle from './Circle';
-import StatusOverlay from './StatusOverlay';
 
 type Props = {
   circles: CircleType[];
   status: Status;
+  gameKey: number;
   onCircleClick: (id: number) => void;
 };
 
-const GameBoard = forwardRef<HTMLDivElement, Props>(({ circles, status, onCircleClick }, ref) => {
+const GameBoard = forwardRef<HTMLDivElement, Props>(({ circles, status, gameKey, onCircleClick }, ref) => {
   return (
     <div className="board" ref={ref}>
       {circles.map((circle) => (
-        <Circle key={circle.id} circle={circle} onClick={onCircleClick} />
+        <Circle key={`${gameKey}-${circle.id}`} circle={circle} status={status} onClick={onCircleClick} />
       ))}
-      {(status === 'won' || status === 'lost') && <StatusOverlay status={status} />}
     </div>
   );
 });
