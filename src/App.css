@@ -86,6 +86,21 @@
   flex-shrink: 0;
 }
 
+/* Status Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  z-index: 2000;
+}
+
+.overlay.won  { color: #4caf50; }
+.overlay.lost { color: #f44336; }
+
 /* Circle */
 .circle {
   position: absolute;
