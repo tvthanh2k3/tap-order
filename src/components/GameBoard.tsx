@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import type { Circle as CircleType } from '../types';
 import Circle from './Circle';
 
@@ -6,12 +7,14 @@ type Props = {
   onCircleClick: (id: number) => void;
 };
 
-export default function GameBoard({ circles, onCircleClick }: Props) {
+const GameBoard = forwardRef<HTMLDivElement, Props>(({ circles, onCircleClick }, ref) => {
   return (
-    <div className="board">
+    <div className="board" ref={ref}>
       {circles.map((circle) => (
         <Circle key={circle.id} circle={circle} onClick={onCircleClick} />
       ))}
     </div>
   );
-}
+});
+
+export default GameBoard;
