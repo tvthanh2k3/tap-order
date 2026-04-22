@@ -77,7 +77,6 @@ export default function App() {
       <GameBoard
         ref={boardRef}
         circles={circles}
-        status={status}
         onCircleClick={handleCircleClick}
       />
       <footer className="footer">Next: {nextNumber}</footer>

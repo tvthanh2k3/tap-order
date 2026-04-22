@@ -22,9 +22,14 @@ export default function ControlPanel({
   const playLabel = status === 'idle' ? 'Play' : 'Restart';
   const timeDisplay = (time / 1000).toFixed(1) + 's';
 
+  const heading =
+    status === 'won' ? 'ALL CLEARED' :
+    status === 'lost' ? 'GAME OVER' :
+    "LET'S PLAY";
+
   return (
     <div className="control">
-      <h1>LET'S PLAY</h1>
+      <h1 className={`heading heading--${status}`}>{heading}</h1>
       <div className="control-row">
         <label>
           Points:
