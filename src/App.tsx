@@ -40,6 +40,9 @@ export default function App() {
   const handleCircleClick = useCallback((id: number) => {
     setNextNumber((currentNext) => {
       if (id !== currentNext) {
+        setCircles((prev) =>
+          prev.map((c) => (c.id === id ? { ...c, isClicked: true, clickedAt: Date.now() } : c))
+        );
         setStatus('lost');
         timeoutsRef.current.forEach(clearTimeout);
         timeoutsRef.current = [];
