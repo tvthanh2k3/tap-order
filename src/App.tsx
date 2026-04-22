@@ -54,7 +54,7 @@ export default function App() {
       const t = setTimeout(() => {
         setCircles((prev) => prev.filter((c) => c.id !== id));
         if (isLast) setStatus('won');
-      }, 2000);
+      }, 3000);
       timeoutsRef.current.push(t);
 
       return newNext;

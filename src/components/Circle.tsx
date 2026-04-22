@@ -7,7 +7,7 @@ type Props = {
 };
 
 const RADIUS = 20;
-const FADE_DURATION = 2000;
+const FADE_DURATION = 3000;
 
 function Circle({ circle, onClick }: Props) {
   const [timeLeft, setTimeLeft] = useState(FADE_DURATION);
