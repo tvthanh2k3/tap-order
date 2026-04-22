@@ -22,6 +22,10 @@ export default function App() {
     return () => timeoutsRef.current.forEach(clearTimeout);
   }, []);
 
+  useEffect(() => {
+    if (status === 'won' || status === 'lost') setIsAuto(false);
+  }, [status]);
+
   function handlePlay() {
     const board = boardRef.current;
     if (!board) return;
