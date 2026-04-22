@@ -48,15 +48,15 @@ export default function App() {
         prev.map((c) => (c.id === id ? { ...c, isClicked: true, opacity: 0 } : c))
       );
 
+      const newNext = currentNext + 1;
+      const isLast = newNext > points;
+
       const t = setTimeout(() => {
         setCircles((prev) => prev.filter((c) => c.id !== id));
+        if (isLast) setStatus('won');
       }, 2000);
       timeoutsRef.current.push(t);
 
-      const newNext = currentNext + 1;
-      if (newNext > points) {
-        setStatus('won');
-      }
       return newNext;
     });
   }, [points]);
