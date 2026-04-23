@@ -17,6 +17,7 @@ export default function App() {
 
   const boardRef = useRef<HTMLDivElement>(null);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const gameTotalRef = useRef(0);
   const { time, resetTimer } = useTimer(status === 'playing');
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function App() {
     if (!board) return;
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
+    gameTotalRef.current = points;
     resetTimer();
     setNextNumber(1);
     setIsAuto(false);
@@ -57,7 +59,7 @@ export default function App() {
       );
 
       const newNext = currentNext + 1;
-      const isLast = newNext > points;
+      const isLast = newNext > gameTotalRef.current;
 
       const t = setTimeout(() => {
         setCircles((prev) => prev.filter((c) => c.id !== id));
@@ -67,9 +69,9 @@ export default function App() {
 
       return newNext;
     });
-  }, [points]);
+  }, []);
 
-  useAutoPlay({ isAuto, status, nextNumber, points, onClickCircle: handleCircleClick });
+  useAutoPlay({ isAuto, status, nextNumber, points: gameTotalRef.current, onClickCircle: handleCircleClick });
 
   return (
     <div className="app">
@@ -89,7 +91,7 @@ export default function App() {
         gameKey={gameKey}
         onCircleClick={handleCircleClick}
       />
-      {status === 'playing' && nextNumber <= points && <footer className="footer">Next: {nextNumber}</footer>}
+      {status === 'playing' && nextNumber <= gameTotalRef.current && <footer className="footer">Next: {nextNumber}</footer>}
     </div>
   );
 }
