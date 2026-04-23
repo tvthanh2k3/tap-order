@@ -38,7 +38,7 @@ function Circle({ circle, status, onClick }: Props) {
         opacity,
         zIndex: 1000 - circle.id,
       }}
-      onClick={() => onClick(circle.id)}
+      onClick={() => { if (status === 'playing') onClick(circle.id); }}
     >
       {circle.id}
       {circle.isClicked && (
