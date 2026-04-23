@@ -69,7 +69,7 @@ export default function App() {
     });
   }, [points]);
 
-  useAutoPlay({ isAuto, status, nextNumber, onClickCircle: handleCircleClick });
+  useAutoPlay({ isAuto, status, nextNumber, points, onClickCircle: handleCircleClick });
 
   return (
     <div className="app">
@@ -89,7 +89,7 @@ export default function App() {
         gameKey={gameKey}
         onCircleClick={handleCircleClick}
       />
-      <footer className="footer">Next: {nextNumber}</footer>
+      {status === 'playing' && nextNumber <= points && <footer className="footer">Next: {nextNumber}</footer>}
     </div>
   );
 }
