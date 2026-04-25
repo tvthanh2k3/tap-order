@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Circle, Status } from './types';
+import { FADE_DURATION } from './constants';
 import { generateCircles } from './utils/generateCircles';
 import { useTimer } from './hooks/useTimer';
 import { useAutoPlay } from './hooks/useAutoPlay';
@@ -43,20 +44,17 @@ export default function App() {
   }
 
   const handleCircleClick = useCallback((id: number) => {
+    setCircles((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, isClicked: true, clickedAt: Date.now() } : c))
+    );
+
     setNextNumber((currentNext) => {
       if (id !== currentNext) {
-        setCircles((prev) =>
-          prev.map((c) => (c.id === id ? { ...c, isClicked: true, clickedAt: Date.now() } : c))
-        );
         setStatus('lost');
         timeoutsRef.current.forEach(clearTimeout);
         timeoutsRef.current = [];
         return currentNext;
       }
-
-      setCircles((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, isClicked: true, clickedAt: Date.now() } : c))
-      );
 
       const newNext = currentNext + 1;
       const isLast = newNext > gameTotalRef.current;
@@ -64,7 +62,7 @@ export default function App() {
       const t = setTimeout(() => {
         setCircles((prev) => prev.filter((c) => c.id !== id));
         if (isLast) setStatus('won');
-      }, 3000);
+      }, FADE_DURATION);
       timeoutsRef.current.push(t);
 
       return newNext;
