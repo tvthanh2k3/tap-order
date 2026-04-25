@@ -1,5 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import type { Circle as CircleType, Status } from '../types';
+import { formatTime } from '../utils/formatTime';
+import { FADE_DURATION } from '../constants';
 
 type Props = {
   circle: CircleType;
@@ -7,12 +9,8 @@ type Props = {
   onClick: (id: number) => void;
 };
 
-const RADIUS = 27;
-const FADE_DURATION = 3000;
-
 function Circle({ circle, status, onClick }: Props) {
   const [timeLeft, setTimeLeft] = useState(FADE_DURATION);
-  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     if (!circle.isClicked || circle.clickedAt == null) return;
@@ -22,7 +20,6 @@ function Circle({ circle, status, onClick }: Props) {
       const elapsed = Date.now() - circle.clickedAt!;
       const remaining = Math.max(0, FADE_DURATION - elapsed);
       setTimeLeft(remaining);
-      setOpacity(remaining / FADE_DURATION);
     };
     update();
     const interval = setInterval(update, 100);
@@ -35,18 +32,17 @@ function Circle({ circle, status, onClick }: Props) {
       style={{
         left: circle.x,
         top: circle.y,
-        opacity,
+        opacity: timeLeft / FADE_DURATION,
         zIndex: 1000 - circle.id,
       }}
       onClick={() => { if (status === 'playing') onClick(circle.id); }}
     >
       {circle.id}
       {circle.isClicked && (
-        <span className="circle-countdown">{(timeLeft / 1000).toFixed(1)}s</span>
+        <span className="circle-countdown">{formatTime(timeLeft)}</span>
       )}
     </div>
   );
 }
 
-export { RADIUS };
 export default memo(Circle);

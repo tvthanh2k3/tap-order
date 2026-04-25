@@ -3,7 +3,6 @@ export type Circle = {
   x: number;
   y: number;
   isClicked: boolean;
-  opacity: number;
   clickedAt?: number;
 };
 
