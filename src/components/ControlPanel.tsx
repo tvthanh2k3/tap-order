@@ -1,4 +1,5 @@
 import type { Status } from '../types';
+import { formatTime } from '../utils/formatTime';
 
 type Props = {
   points: number;
@@ -20,7 +21,7 @@ export default function ControlPanel({
   onToggleAuto,
 }: Props) {
   const playLabel = status === 'idle' ? 'Play' : 'Restart';
-  const timeDisplay = (time / 1000).toFixed(1) + 's';
+  const timeDisplay = formatTime(time);
 
   const heading =
     status === 'won' ? 'ALL CLEARED' :
